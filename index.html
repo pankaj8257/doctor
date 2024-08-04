@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Schedule</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="schedule-container">
+        <h1>Doctor Schedule</h1>
+        <div class="days">
+            <button class="day" onclick="showDetails('monday')">Monday</button>
+            <button class="day" onclick="showDetails('tuesday')">Tuesday</button>
+            <button class="day" onclick="showDetails('wednesday')">Wednesday</button>
+            <button class="day" onclick="showDetails('thursday')">Thursday</button>
+            <button class="day" onclick="showDetails('friday')">Friday</button>
+            <button class="day" onclick="showDetails('saturday')">Saturday</button>
+        </div>
+        <div class="details" id="details">
+            <!-- Details will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        const doctors = {
+            monday: [
+                {name: 'Dr. Pankaj', time: '10:00 AM', location: 'Clinic A', specialty: 'Cardiology'},
+                {name: 'Dr. Johnson', time: '11:00 AM', location: 'Clinic B', specialty: 'Dermatology'},
+                {name: 'Dr. Green', time: '01:00 PM', location: 'Clinic C', specialty: 'Orthopedics'},
+                {name: 'Dr. Taylor', time: '03:00 PM', location: 'Clinic D', specialty: 'Pediatrics'},
+                {name: 'Dr. Smith', time: '10:00 AM', location: 'Clinic A', specialty: 'Cardiology'},
+                {name: 'Dr. Johnson', time: '11:00 AM', location: 'Clinic B', specialty: 'Dermatology'},
+                {name: 'Dr. Green', time: '01:00 PM', location: 'Clinic C', specialty: 'Orthopedics'},
+                {name: 'Dr. Taylor', time: '03:00 PM', location: 'Clinic D', specialty: 'Pediatrics'},
+                {name: 'Dr. Green', time: '01:00 PM', location: 'Clinic C', specialty: 'Orthopedics'},
+                {name: 'Dr. Taylor', time: '03:00 PM', location: 'Clinic D', specialty: 'Pediatrics'}
+                
+            ],
+            tuesday: [
+                {name: 'Dr. Rana', time: '10:00 AM', location: 'Clinic A', specialty: 'Cardiology'},
+                {name: 'Dr. Johnson', time: '11:00 AM', location: 'Clinic B', specialty: 'Dermatology'},
+                {name: 'Dr. Green', time: '01:00 PM', location: 'Clinic C', specialty: 'Orthopedics'},
+                {name: 'Dr. Taylor', time: '03:00 PM', location: 'Clinic D', specialty: 'Pediatrics'},
+                {name: 'Dr. Smith', time: '10:00 AM', location: 'Clinic A', specialty: 'Cardiology'},
+                {name: 'Dr. Johnson', time: '11:00 AM', location: 'Clinic B', specialty: 'Dermatology'},
+                {name: 'Dr. Green', time: '01:00 PM', location: 'Clinic C', specialty: 'Orthopedics'},
+                {name: 'Dr. Taylor', time: '03:00 PM', location: 'Clinic D', specialty: 'Pediatrics'},
+                {name: 'Dr. Green', time: '01:00 PM', location: 'Clinic C', specialty: 'Orthopedics'},
+                {name: 'Dr. Taylor', time: '03:00 PM', location: 'Clinic D', specialty: 'Pediatrics'}
+               
+            ],
+            wednesday: [
+                {name: 'Dr. Pinak', time: '10:00 AM', location: 'Clinic A', specialty: 'Cardiology'},
+                {name: 'Dr. Johnson', time: '11:00 AM', location: 'Clinic B', specialty: 'Dermatology'},
+                {name: 'Dr. Green', time: '01:00 PM', location: 'Clinic C', specialty: 'Orthopedics'},
+                {name: 'Dr. Taylor', time: '03:00 PM', location: 'Clinic D', specialty: 'Pediatrics'},
+                {name: 'Dr. Smith', time: '10:00 AM', location: 'Clinic A', specialty: 'Cardiology'},
+                {name: 'Dr. Johnson', time: '11:00 AM', location: 'Clinic B', specialty: 'Dermatology'},
+                {name: 'Dr. Green', time: '01:00 PM', location: 'Clinic C', specialty: 'Orthopedics'},
+                {name: 'Dr. Taylor', time: '03:00 PM', location: 'Clinic D', specialty: 'Pediatrics'},
+                {name: 'Dr. Green', time: '01:00 PM', location: 'Clinic C', specialty: 'Orthopedics'},
+                {name: 'Dr. Taylor', time: '03:00 PM', location: 'Clinic D', specialty: 'Pediatrics'}
+                
+            ],
+            thursday: [
+                {name: 'Dr. Satyajit', time: '10:00 AM', location: 'Clinic A', specialty: 'Cardiology'},
+                {name: 'Dr. Johnson', time: '11:00 AM', location: 'Clinic B', specialty: 'Dermatology'},
+                {name: 'Dr. Green', time: '01:00 PM', location: 'Clinic C', specialty: 'Orthopedics'},
+                {name: 'Dr. Taylor', time: '03:00 PM', location: 'Clinic D', specialty: 'Pediatrics'},
+                {name: 'Dr. Smith', time: '10:00 AM', location: 'Clinic A', specialty: 'Cardiology'},
+                {name: 'Dr. Johnson', time: '11:00 AM', location: 'Clinic B', specialty: 'Dermatology'},
+                {name: 'Dr. Green', time: '01:00 PM', location: 'Clinic C', specialty: 'Orthopedics'},
+                {name: 'Dr. Taylor', time: '03:00 PM', location: 'Clinic D', specialty: 'Pediatrics'},
+                {name: 'Dr. Green', time: '01:00 PM', location: 'Clinic C', specialty: 'Orthopedics'},
+                {name: 'Dr. Taylor', time: '03:00 PM', location: 'Clinic D', specialty: 'Pediatrics'}
+            ],
+            friday: [
+                {name: 'Dr. Rohit', time: '10:00 AM', location: 'Clinic A', specialty: 'Cardiology'},
+                {name: 'Dr. Johnson', time: '11:00 AM', location: 'Clinic B', specialty: 'Dermatology'},
+                {name: 'Dr. Green', time: '01:00 PM', location: 'Clinic C', specialty: 'Orthopedics'},
+                {name: 'Dr. Taylor', time: '03:00 PM', location: 'Clinic D', specialty: 'Pediatrics'},
+                {name: 'Dr. Smith', time: '10:00 AM', location: 'Clinic A', specialty: 'Cardiology'},
+                {name: 'Dr. Johnson', time: '11:00 AM', location: 'Clinic B', specialty: 'Dermatology'},
+                {name: 'Dr. Green', time: '01:00 PM', location: 'Clinic C', specialty: 'Orthopedics'},
+                {name: 'Dr. Taylor', time: '03:00 PM', location: 'Clinic D', specialty: 'Pediatrics'},
+                {name: 'Dr. Green', time: '01:00 PM', location: 'Clinic C', specialty: 'Orthopedics'},
+                {name: 'Dr. Taylor', time: '03:00 PM', location: 'Clinic D', specialty: 'Pediatrics'}
+            ],
+            saturday: [
+                {name: 'Dr. Pankaj', time: '10:00 AM', location: 'Clinic A', specialty: 'Cardiology'},
+                {name: 'Dr. Johnson', time: '11:00 AM', location: 'Clinic B', specialty: 'Dermatology'},
+                {name: 'Dr. Green', time: '01:00 PM', location: 'Clinic C', specialty: 'Orthopedics'},
+                {name: 'Dr. Taylor', time: '03:00 PM', location: 'Clinic D', specialty: 'Pediatrics'},
+                {name: 'Dr. Smith', time: '10:00 AM', location: 'Clinic A', specialty: 'Cardiology'},
+                {name: 'Dr. Johnson', time: '11:00 AM', location: 'Clinic B', specialty: 'Dermatology'},
+                {name: 'Dr. Green', time: '01:00 PM', location: 'Clinic C', specialty: 'Orthopedics'},
+                {name: 'Dr. Taylor', time: '03:00 PM', location: 'Clinic D', specialty: 'Pediatrics'},
+                {name: 'Dr. Green', time: '01:00 PM', location: 'Clinic C', specialty: 'Orthopedics'},
+                {name: 'Dr. Taylor', time: '03:00 PM', location: 'Clinic D', specialty: 'Pediatrics'}
+            ]
+        };
+
+        function showDetails(day) {
+            const detailsDiv = document.getElementById('details');
+            detailsDiv.innerHTML = '';
+            doctors[day].forEach(doctor => {
+                const doctorDiv = document.createElement('div');
+                doctorDiv.classList.add('doctor');
+                doctorDiv.innerHTML = `
+                    <h2>${doctor.name}</h2>
+                    <p>Time: ${doctor.time}</p>
+                    <p>Location: ${doctor.location}</p>
+                    <p>Specialty: ${doctor.specialty}</p>
+                `;
+                detailsDiv.appendChild(doctorDiv);
+            });
+        }
+    </script>
+</body>
+</html>
